@@ -5,17 +5,7 @@
     <link rel="stylesheet" type="text/css" href="css/custom"/>
 </head>
 <body>
-    <div class="container-main">
-      <div class="header">
-        <a onclick="show_hide_navbar()" id="nav-logo">Tendermint Metrics</a>
-        <div class="navbar">
-          <a class="btn" href="/">Dashboard</a>
-          <a class="btn" >Load</a>
-          <a class="btn" href="/clean_cache">Delete</a>
-        </div>
-      </div>
-    </div>  
-    <div id="content-main"></div>    
+    <div id="content" class="content-main"></div>    
 </body>
 <script>
     let i = 0;
@@ -28,7 +18,7 @@
 <script>
     let data = {}
     let labels = []
-    var content = document.getElementById("content-main");
+    var content = document.getElementById("content");
             
     async function loadJson(){
         try {

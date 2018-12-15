@@ -16,6 +16,12 @@ app.get('/send_json', cors(), function (req, res) {
     res.sendFile(path.join(__dirname+'/'+data_name));
 });
 
+//  Send bulma css
+app.get('/css/bulma', function (req, res) {
+    res.sendFile(path.join(__dirname+'/node_modules/bulma/css/bulma.min.css'));
+});
+
+
 // Redirect
 app.get('/', async function (req, res) {
     res.redirect('/dashboard');

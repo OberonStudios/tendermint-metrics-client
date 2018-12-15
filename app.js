@@ -4,7 +4,7 @@ var cors = require('cors')
 var app = express()
 var port = 3000
 var path    = require("path");
-var data_url = 'https://raw.githubusercontent.com/OberonStudios/tendermint-metrics-client/master/tendermint_data.json'
+var json_file = 'tendermint_data.json'
 
 // Routes
 // Dasboard & redirect to dashboard
@@ -18,7 +18,7 @@ app.get('/', async function (req, res) {
 
 //  Send json, use cors 
 app.get('/send_json', cors(), function (req, res) {
-    res.sendFile(data_url);
+    res.sendFile(path.join(__dirname+'/'+json_file));
 });
 
 //  Send bulma css && custom css

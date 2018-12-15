@@ -32,9 +32,9 @@ app.get('/css/custom', function (req, res) {
 
 // Remove tendermint json cache
 app.get('/clean_cache', function(req, res) {
-    fs.unlink(data_name, (err) => {
+    fs.unlink(json_file, (err) => {
         if (err) throw err;
-            console.log(`${data_name} was removed`);
+            console.log(`${json_file} was removed`);
     });
     res.redirect('/')
 });

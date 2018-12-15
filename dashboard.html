@@ -1,0 +1,66 @@
+<body>
+    <h1>Dasboard</h1>
+    <div id="content"></div>    
+</body>
+<script>
+    let data = {}
+    let labels = []
+    var content = document.getElementById("content");
+            
+
+    async function loadJson(){
+        try {
+            await fetch('http://localhost:3000/send_json').then(res => res.json()).then(json =>  data = json);
+        }
+        catch(er) {
+            console.log(er);
+        }
+        
+        for (var label in data) {
+            labels.push(label);
+        }
+
+        for(var i=0; i<labels.length;i++){
+            if (typeof(data[labels[i]])==='object') {
+                var new_p = document.createElement("p");
+                var new_p_text = document.createTextNode(labels[i]);
+                new_p.appendChild(new_p_text);
+
+                var new_ul = document.createElement("ul");
+                for(label in data[labels[i]]){  
+                    var new_li = document.createElement("li");
+                    var new_li_text = document.createTextNode(label+" - "+data[labels[i]][label]);
+                    new_li.appendChild(new_li_text);
+                    new_ul.appendChild(new_li);
+                }
+                
+                new_p.appendChild(new_ul);
+                content.appendChild(new_p);
+            } else {
+                var new_p = document.createElement("p");
+                var new_p_text = document.createTextNode(labels[i]+" "+data[labels[i]]);
+                new_p.appendChild(new_p_text);
+                content.appendChild(new_p);
+            }
+        
+            // console.log(i, labels[i], getData(i));
+        }
+        
+    } 
+
+    // function getData(index) {
+            
+    //     if (typeof(data[labels[index]])==='object') {
+    //         for(label in data[labels[index]]){
+    //             console.log(label, data[labels[index]][label]);
+    //         }
+    //     } else {
+    //         return data[labels[index]]
+    //     }
+
+    // }
+
+
+    loadJson();
+
+</script>

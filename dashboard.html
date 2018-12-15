@@ -1,12 +1,52 @@
 <!DOCTYPE html>
+<html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <link rel="stylesheet" type="text/css" href="css/bulma"/>
     <link rel="stylesheet" type="text/css" href="css/custom"/>
 </head>
 <body>
-    <div id="content" class="content-main"></div>    
+    <nav class="navbar is-white">
+    <div class="container">
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item is-active" href="#">Metrics</a>
+                <a class="navbar-item" href="#">to be added</a>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <input class="input" type="search" placeholder="Search forum...">
+                </div>
+            </div>
+        </div>
+    </div>
+    </nav>
+
+    <section class="container">
+        <div class="columns">
+            <div class="column">
+                <div id="content" class="box content"></div>
+            </div>
+        </div>
+    </section>        
+
 </body>
+<footer class="footer">
+    <div class="container">
+        <div class="content has-text-centered">
+            <div class="columns is-mobile is-centered">
+                <div class="field is-grouped is-grouped-multiline">
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <a class="tag is-link" href="https://github.com/OberonStudios/tendermint-metrics-client">Project on GitHub</a>
+                            <span class="tag is-light">Oberon Studios LLC </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 <script>
     let i = 0;
         nav_status = ['grid','none'];
@@ -33,8 +73,17 @@
         }
 
         for(var i=0; i<labels.length;i++){
+            var new_metric = document.createElement("article");
+            new_metric.classList.add("post");
+            
+            // var new_columns = document.createElement("div");
+            // new_container.classList.add("column");
+            // var new_columns = document.createElement("div");
+            // new_container.classList.add("column");
+
+
             if (typeof(data[labels[i]])==='object') {
-                var new_p = document.createElement("p");
+                var new_p = document.createElement("h5");
                 var new_p_text = document.createTextNode(labels[i]);
                 new_p.appendChild(new_p_text);
 
@@ -46,16 +95,28 @@
                     new_ul.appendChild(new_li);
                 }
                 
-                new_p.appendChild(new_ul);
-                content.appendChild(new_p);
+                new_metric.appendChild(new_p);
+                new_metric.appendChild(new_ul);
+                content.appendChild(new_metric);
             } else {
-                var new_p = document.createElement("p");
-                var new_p_text = document.createTextNode(labels[i]+" "+data[labels[i]]);
+                var new_p = document.createElement("h5");
+                var new_p_text = document.createTextNode(labels[i])
+                var new_ul = document.createElement("ul");
                 new_p.appendChild(new_p_text);
-                content.appendChild(new_p);
+            
+                var new_li = document.createElement("li");
+                var new_li_text = document.createTextNode(data[labels[i]]);
+
+                new_li.appendChild(new_li_text);
+                new_ul.appendChild(new_li);
+            
+                new_metric.appendChild(new_p);
+                new_metric.appendChild(new_ul);
+                content.appendChild(new_metric);
             }
         }  
     } 
     loadJson();
 
 </script>
+</html>
